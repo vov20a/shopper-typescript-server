@@ -1,0 +1,6 @@
+REACT_APP_API_URL=host url
+REACT_APP_API_MAIL=frontend url+/password
+
+EMAIL_HOST_PASSWORD=mail.ru generated
+EMAIL_HOST_USER=my email mail.ru
+MONGODB_URI=db address+password
