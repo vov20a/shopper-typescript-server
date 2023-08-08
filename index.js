@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import cors from 'cors';
 import fs from 'fs';
-import { checkAuthAndAdmin } from './utils/index.js';
+import { checkAuthAndAdmin, handleValidationErrors } from './utils/index.js';
 import authRouter from './routes/auth.js';
 import userRouter from './routes/user.js';
 import mailRouter from './routes/mail.js';
@@ -11,6 +11,8 @@ import productRouter from './routes/product.js';
 import categoryRouter from './routes/category.js';
 import orderRouter from './routes/order.js';
 import postRouter from './routes/post.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -35,7 +37,11 @@ const upload = multer({ storage });
 app.use(express.json());
 
 //для управления портами-разрешает frontend
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+  }),
+);
 
 app.use('/uploads', express.static('uploads'));
 

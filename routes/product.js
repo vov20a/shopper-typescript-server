@@ -8,6 +8,7 @@ import {
   getRandomizeProducts,
   remove,
   update,
+  // getAllAggregate,
 } from '../controllers/ProductController.js';
 import { checkAuthAndAdmin, handleValidationErrors } from '../utils/index.js';
 import { productCreateValidation } from '../validations.js';
@@ -20,6 +21,7 @@ router.get('/products/count', getCount);
 //create
 router.post(
   '/products',
+  //временно закомментировал
   checkAuthAndAdmin,
   productCreateValidation,
   handleValidationErrors,
@@ -28,6 +30,9 @@ router.post(
 
 //getAll
 router.get('/products', getAll);
+
+// //getAllAggregate
+// router.get('/productsAggr', getAllAggregate);
 
 //getOne
 router.get('/products/:id', getOne);
@@ -39,9 +44,20 @@ router.get('/products/categories/:categoryId', getProductsByCategory);
 router.get('/randomize/products', getRandomizeProducts);
 
 //remove
-router.delete('/products/:id', checkAuthAndAdmin, remove);
+router.delete(
+  '/products/:id',
+  //временно закомментировал
+  checkAuthAndAdmin,
+  remove,
+);
 
 //update
-router.patch('/products/:id', checkAuthAndAdmin, handleValidationErrors, update);
+router.patch(
+  '/products/:id',
+  //временно закомментировал
+  checkAuthAndAdmin,
+  handleValidationErrors,
+  update,
+);
 
 export default router;

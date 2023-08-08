@@ -57,13 +57,14 @@ export const getAll = async (req, res) => {
     const limit = req.query?.limit;
 
     let sort = req.query?.sort;
-    // console.log(sort);
+
     if (sort?.match(RegExp(/-/))) {
       sort = sort.substring(1);
       sort = sort ? `{"${sort}": -1 }` : '{"rating":-1}';
     } else {
       sort = sort ? `{"${sort}": 1 }` : '{"rating":1}';
     }
+    // console.log(sort);
 
     const search = req.query?.search;
 
@@ -78,6 +79,10 @@ export const getAll = async (req, res) => {
       .limit(limit)
       .populate('categoryId')
       .exec();
+    //get all count//временно
+    // const count = await ProductModel.find().countDocuments();
+    // res.json({ products, count });
+    //временно закомментировал
     res.json(products);
   } catch (err) {
     console.log(err);
@@ -249,8 +254,7 @@ export const remove = async (req, res) => {
             message: 'Товар не найден',
           });
         }
-
-        // if (doc.productUrl.includes('http://localhost:4444')) {
+        //временно закомментировал
         if (doc.productUrl.includes(process.env.REACT_APP_API_URL)) {
           const fileName = doc.productUrl.match(/uploads\/[\w]+\.[\w]+/);
           const filePath = path.resolve(fileName[0]);
